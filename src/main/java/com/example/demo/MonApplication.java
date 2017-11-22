@@ -30,7 +30,7 @@ public class MonApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*userRepository.save(new User("one", "one"));
+		userRepository.save(new User("one", "one"));
 		userRepository.save(new User("two", "two"));
 		userRepository.save(new User("three", "three"));
 		
@@ -40,7 +40,7 @@ public class MonApplication implements CommandLineRunner{
 		 System.out.println(userr.getFname());
 		 System.out.println(userr.getLname());
 		}
-		*/
+		
 		
 	}
 }
