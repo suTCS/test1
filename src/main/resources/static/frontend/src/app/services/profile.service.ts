@@ -1,11 +1,16 @@
+
 import { Injectable } from '@angular/core';
 
-import {User} from '../models/user';
+import {User} from '../models/user.interface';
 import 'rxjs/add/operator/map';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+// import {HttpClient} from '@angular/common/http';
+import {merge} from 'rxjs/observable/merge';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -18,10 +23,18 @@ export class ProfileService {
   constructor(private http: Http) { }
 
   //(res: Response) === res
-  getUsers() {
+  getUsers(): Observable<User[]>  {
 
-        return this.http.get(this.baseUrl + '/users', this.options).map((response: Response) => response.json())
+        return this.http.get(this.baseUrl + '/users', this.options)
+        .map((response: Response) => response.json())
         .catch(this.errorHandler);
+      }
+
+      findByLastName(lname: string) {
+        //const url = '/findbylastname/$';
+        return this.http.get(this.baseUrl +'/users/' + lname, this.options)
+        .map((response: Response) => response.json())
+          .catch(this.errorHandler);
       }
 
       getUser(id: Number) {
@@ -47,6 +60,11 @@ export class ProfileService {
                 return this.http.put(this.baseUrl + '/user', JSON.stringify(user), this.options).map((response: Response) => response.json())
                             .catch(this.errorHandler);
     }
+ 
+
+
+
+
 
   private errorHandler(err: Response) {
     //console.error(err);

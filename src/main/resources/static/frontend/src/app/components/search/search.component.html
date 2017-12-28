@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="form group">
+    <label for="lname"> Last Name</label>
+      <input type="text" id="lname" name="lname" class="form-control" [(ngModel)]="lname">
+  </div>
+
+  <div class="btn-group"> 
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+</form>
+
+<ul>
+  djflijl
+	<li *ngFor="let user of users">
+		<h4>{{user.id}} - {{user.fname}} {{user.lname}}</h4>
+	</li>
+</ul>
+<!--
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="lastname">Last Name</label> 
+    <input type="text" class="form-control" id="lastname" required [(ngModel)]="lastName"
+      name="lastname">
+  </div>
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+</form> -->

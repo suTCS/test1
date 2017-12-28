@@ -1,24 +1,443 @@
-<div class="container">
+
+<app-search></app-search>
+<i class="material-icons md-18 orange600">face</i>
+<i class="material-icons md-24">&#xE87C;</i>
+<i class="material-icons md-36">face</i>
+<i class="material-icons md-48">&#xE87C;</i>
+<i class="material-icons md-dark">face</i>
+<i class="material-icons md-dark md-inactive">&#xE87C;</i>
+<div class="back"> 
+<i class="material-icons md-light">face</i>
+<i class="material-icons md-light md-inactive">&#xE87C;</i> </div> <br>
+
+<button mat-button color="accent">My Button</button> <br>
+
+<mat-toolbar color="primary">
+    <span>(custom-color) Application Title</span>
   
-    <table class="table table-striped">
-      <thead>
-        <th>Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Operations</th>
-      </thead>
-      <tbody>
-    <tr *ngFor="let user of users" >
-      <td> {{user.id}} </td>
-      <td>{{user.fname}} </td>
-      <td>{{user.lname}} </td>
-      <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button></td>
-      <td><button class="btn btn-primary" (click)="updateUser(user)">Edit</button></td>
-    </tr>
-    </tbody>
-    </table>
-    <button class="btn btn-danger" (click)="newUser()">New User</button>
-  </div>
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+  
+    <span>Right Aligned Text</span>
+  </mat-toolbar>
+  
+  <!-- -->
+  <div class="alternative"> 
+  <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <div>Custom Toolbar</div>
+      </mat-toolbar-row> 
+    
+      <mat-toolbar-row>
+        <span>Second Line</span>
+        <span class="example-spacer"></span>
+        <mat-icon class="example-icon">verified_user</mat-icon>
+      </mat-toolbar-row>
+    
+      <mat-toolbar-row>
+        <span>Third Line</span>
+        <span class="example-spacer"></span>
+        <mat-icon class="example-icon">favorite</mat-icon>
+        <mat-icon class="example-icon">delete</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar> </div>
+    <br>
+      
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voicemail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu> <br>
+
+<mat-card>
+  <mat-form-field>
+    <input matInput [(ngModel)] = "answer" placeholder="who?">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="showAnswer()"> Answer me</button>
+  <mat-spinner [style.display] = "showSpinner ? 'block' : 'none'"></mat-spinner> <!--if the answer is correct, spinner is block otherwise, none -->
+</mat-card>
+
+<mat-card *ngIf="answerDisplay">
+  <h1> {{answerDisplay}}, you're damn right</h1>
+</mat-card> 
+
+<!-- this is from Angular Material form
+<h3> Address Form</h3>
+<form class="example-form" (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <mat-input-container class="example-full-width">
+    <input matInput placeholder="Company" disabled value="Google">
+  </mat-input-container>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-input-container class="example-full-width">
+      <input matInput placeholder="First name" id="firstname" ([ngModel])="address.firstname" name="firstname">
+    </mat-input-container></td>
+    <td><mat-input-container class="example-full-width">
+      <input matInput placeholder="Long Last Name That Will Be Truncated" id="lastname" ([ngModel])="address.lastname" name="lastname">
+    </mat-input-container></td>
+  </tr></table>
+
+  <p>
+    <mat-input-container class="example-full-width">
+      <textarea matInput placeholder="Address" id="address" ([ngModel])="address.address" name="address">1600 Amphitheatre Pkwy</textarea>
+    </mat-input-container>
+    <mat-input-container class="example-full-width">
+      <textarea matInput placeholder="Address 2" id="address2" ([ngModel])="address.address2" name="address2"></textarea>
+    </mat-input-container>
+  </p>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-input-container class="example-full-width">
+      <input matInput placeholder="City" id="city" ([ngModel])="address.city" name="city">
+    </mat-input-container></td>
+    <td><mat-input-container class="example-full-width">
+      <input matInput placeholder="State" id="state" ([ngModel])="address.state" name="state">
+    </mat-input-container></td>
+    <td><mat-input-container class="example-full-width">
+      <input matInput #postalCode maxlength="5" placeholder="Postal Code" value="940434" id="postalcode" ([ngModel])="address.postalcode" name="postalcode">
+      <mat-hint align="start">{{postalCode.value.length}} / 6</mat-hint>
+    </mat-input-container></td>
+  </tr></table>
+  <p>
+    <button type="submit" md-rai  sed-button>Submit</button>
+  </p>
+</form> -->
 
 
+<form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm"> 
+  <table class="fullwidth" cellspacing="0">
+     <tr> <td> <mat-input-container class="fullwidth"> 
+       <input matInput placeholder="First Name" id="firstname" [(ngModel)]="address.firstname" name="firstname" /> 
+      </mat-input-container> </td> 
+      <td> <mat-input-container class="fullwidth"> 
+        <input matInput placeholder="Last Name" id="lastname" [(ngModel)]="address.lastname" name="lastname" /> 
+      </mat-input-container> </td> </tr> </table> 
+      <mat-input-container class="fullwidth">
+         <textarea matInput placeholder="Address" id="address" [(ngModel)] = "address.address" name="address"></textarea>
+         </mat-input-container> 
+         <table class="fullwidth" cellspacing="0">
+            <tr> <td> <mat-input-container class="fullwidth"> 
+              <input matInput placeholder="City" id="city" [(ngModel)]="address.city" name="city" /> 
+            </mat-input-container> </td> 
+            <td> <mat-input-container class="fullwidth"> 
+              <input matInput placeholder="State" id="state" [(ngModel)]="address.state" name="state" />
+             </mat-input-container> </td> 
+             <td> <mat-input-container class="fullwidth">
+                <input matInput #postalcode maxlength="5" placeholder="postalcode" id="postalcode" [(ngModel)]="address.postalcode" name="postalcode" /> 
+                <mat-hint align="end"> {{postalcode.value.length}} / 5 </mat-hint> </mat-input-container> </td> </tr> </table>
+                 <button type="submit" mat-raised-button color="primary">Submit</button> </form>  
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h1> Dialog Demo</h1>
+      </mat-card-title>
+    </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button (click)="openDialog()"> Open Dialog</button>
+    <strong>Result: {{dialogResult}}</strong>
+  </mat-card-content>
+</mat-card>            
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1> Tooltip Demo</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <span matTooltip="This is the Tooltip!" matTooltipPosition="above"> This text has a tooltip!</span>
+  </mat-card-content>
+</mat-card>
+<br>
+<span matTooltip="Tooltip!">I have a tooltip</span>
+<br><br><br>
+  
+<button mat-button (click)="openSnackBar()" aria-label="Show an example snack-bar">
+    Pizza party
+  </button>
+  <br><br><br>
+
+  <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Toggle extra text
+        </button>
+      </mat-drawer>
+    
+      <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+          Toggle sidenav
+        </button>
+      </div>
+    
+    </mat-drawer-container>
+    
+
+    
+    <button mat-button [matMenuTriggerFor]="animals">Animal index</button>
+    
+    <mat-menu #animals="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
+      <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
+    </mat-menu>
+    
+    <mat-menu #vertebrates="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
+      <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
+      <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
+      <button mat-menu-item>Birds</button>
+      <button mat-menu-item>Mammals</button>
+    </mat-menu>
+    
+    <mat-menu #invertebrates="matMenu">
+      <button mat-menu-item>Insects</button>
+      <button mat-menu-item>Molluscs</button>
+      <button mat-menu-item>Crustaceans</button>
+      <button mat-menu-item>Corals</button>
+      <button mat-menu-item>Arachnids</button>
+      <button mat-menu-item>Velvet worms</button>
+      <button mat-menu-item>Horseshoe crabs</button>
+    </mat-menu>
+    
+    <mat-menu #fish="matMenu">
+      <button mat-menu-item>Baikal oilfish</button>
+      <button mat-menu-item>Bala shark</button>
+      <button mat-menu-item>Ballan wrasse</button>
+      <button mat-menu-item>Bamboo shark</button>
+      <button mat-menu-item>Banded killifish</button>
+    </mat-menu>
+    
+    <mat-menu #amphibians="matMenu">
+      <button mat-menu-item>Sonoran desert toad</button>
+      <button mat-menu-item>Western toad</button>
+      <button mat-menu-item>Arroyo toad</button>
+      <button mat-menu-item>Yosemite toad</button>
+    </mat-menu>
+    
+    <mat-menu #reptiles="matMenu">
+      <button mat-menu-item>Banded Day Gecko</button>
+      <button mat-menu-item>Banded Gila Monster</button>
+      <button mat-menu-item>Black Tree Monitor</button>
+      <button mat-menu-item>Blue Spiny Lizard</button>
+      <button mat-menu-item disabled>Velociraptor</button>
+    </mat-menu>
+    
+    
+<!--  wiki recommend articles -->
+ <div> 
+      <mat-grid-list cols="4" rowHeight="100px" >
+        <mat-grid-tile colspan='3' rowspan='1' id="colum1"> Recommended Articles</mat-grid-tile>
+        <mat-grid-tile colspan='1' rowspan='1' id="colum2" > <img src="assets/images/11.jpeg" width="100%" height="100%"></mat-grid-tile> 
+        <mat-grid-tile colspan='4' rowspan='2'> 
+        <ul> 
+          
+              <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Article Title The Color Tool helps you create, share, and apply color palettes to your UI, as well as measure the accessibility level of any color combination. The Color Tool helps you create, share, and apply &nbsp; &nbsp; 
+                          </mat-panel-title>
+                          <mat-panel-description>
+                             {{panelOpenState ? 'open' : 'See more'}}
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p>Author : </p>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+          <br>
+       
+            <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                      <mat-panel-title>
+                          Article Title &nbsp; &nbsp;
+                        </mat-panel-title>
+                        <mat-panel-description>
+                           {{panelOpenState ? 'open' : 'See more'}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>Beginning of article will display (probably just one line)</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                  <br>
+            <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                      <mat-panel-title>
+                          Article Title &nbsp; &nbsp;
+                        </mat-panel-title>
+                        <mat-panel-description>
+                           {{panelOpenState ? 'open' : 'See more'}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>Beginning of article will display (probably just one line)</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+       
+      </ul>
+        </mat-grid-tile>     
+      </mat-grid-list> 
+    <br>
+    
+<!-- recent changes-->
  
+
+<mat-list class="recent-change"> 
+    Recent Changes
+    <mat-list-item id="recent-change-list" *ngFor="let recentchange of recentchanges">
+      <mat-icon mat-list-icon>{{recentchange.icon}}</mat-icon>
+      <h4 mat-line>{{recentchange.name}} &nbsp; &nbsp; Author&nbsp;: {{recentchange.author}} &nbsp; &nbsp; <span>{{recentchange.updated | date}}  </span> </h4>
+    </mat-list-item>    
+</mat-list>
+
+</div>
+
+
+        <!--  -->
+
+      <br>
+
+      <div > <img src="assets/images/angular.svg" width="250" height="250">  </div>
+
+
+      <div class="container">
+        <input type="Search" ng-model="search" placeholder="Search">
+                 
+            <table class="table table-striped">
+              <thead>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Operations</th>
+              </thead>
+              <tbody>
+            <tr *ngFor="let user of users" >
+              <td> {{user.id}} </td>
+              <td>{{user.fname}} </td>
+              <td>{{user.lname}} </td>
+              <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button></td>
+              <td><button class="btn btn-primary" (click)="updateUser(user)">Edit</button></td>
+            </tr>
+            </tbody>
+            </table>
+            <button class="btn btn-danger" (click)="newUser()">New User</button>
+          </div> 
+ 
+
+      <div> 
+        <button class="btn btn-danger" (click)="searchButton()">Search</button>
+         
+      </div>
+<!--
+      <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="fname">
+            <mat-header-cell *matHeaderCellDef> FirstNname </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.fname}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="lname">
+            <mat-header-cell *matHeaderCellDef> lastNname </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.lname}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef> DeleteUser </mat-header-cell>
+              <mat-cell *matCellDef="let user"><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button></mat-cell>
+            </ng-container>
+
+          <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef> updateUser </mat-header-cell>
+              <mat-cell *matCellDef="let user"><button class="btn btn-primary" (click)="updateUser(user)">Edit</button></mat-cell>
+          </ng-container>
+              
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      
+        </mat-table>
+        <!--<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+    <!--  </div> -->
+
+     
+      
+      
+     
+      
+                   
+
+
+ <!-- <div class="container">
+    
+      <table class="table table-striped">
+        <thead>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Operations</th>
+        </thead>
+       <tbody>
+      <tr *ngFor="let user of users" >
+         {{user.id}}
+        {{user.fname}}
+        {{user.lname}}
+      </tr>
+   </tbody>
+    </table>
+      </div>
+       <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button></td>
+        <td><button class="btn btn-primary" (click)="updateUser(user)">Edit</button></td>
+      </tr>
+      <div *ngFor="let user of (users$ | async)">
+        {{user.id}}
+       {{user.fname}}
+        {{user.lname}}
+      </div>
+      {{users$ | async}}
+    
+     <button class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+        <button class="btn btn-primary" (click)="updateUser(user)">Edit</button>
+      <button class="btn btn-danger" (click)="newUser()">New User</button>
+
+
+ <div *ngIf="getReqSent; then loadingBlock; else listBlock"> </div>
+ <ng-template #loadingBlock> 
+   <div class='loading'></div>
+ </ng-template>
+
+ <ng-template #listBlock>
+
+ </ng-template>
+
+ <ul>
+   <li *ngFor="let element of elements"> {{elements}}</li>
+ </ul>
+
+
+ <div *ngFor="let user of users">
+  {{user.id}}
+  {{user.fname}}
+  {{user.lname}}
+ </div>
+ <i class="material-icons">face</i> -->
