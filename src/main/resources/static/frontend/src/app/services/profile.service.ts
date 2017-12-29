@@ -32,7 +32,8 @@ export class ProfileService {
 
       findByLastName(lname: string) {
         //const url = '/findbylastname/$';
-        return this.http.get(this.baseUrl +'/users/' + lname, this.options)
+       // return this.http.get(this.baseUrl +'/users/' + lname, this.options)
+       return this.http.get(this.baseUrl + `/user/?lname=${lname}`) 
         .map((response: Response) => response.json())
           .catch(this.errorHandler);
       }

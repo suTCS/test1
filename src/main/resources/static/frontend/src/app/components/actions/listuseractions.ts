@@ -1,5 +1,5 @@
-/*import {Action} from '@ngrx/store';
-// import {User} from '../../models/user';
+import {Action} from '@ngrx/store';
+import {User} from '../../models/user.interface';
 export interface PayloadAction extends Action {payload: string};
 
 export const GET_USERS = '[Gett] Users';
@@ -19,6 +19,7 @@ export const POST_USER = 'Post User';
 export const POST_USER_SUCCESS = 'Post user success';
 export const POST_USER_FAIL = 'Post user fail';
 
+/*
 export const GetUsers = (): Action => {
   return { type: GET_USERS};
 };
@@ -55,8 +56,14 @@ export const PostUserFail = (): Action => {
 	return {
 		type: POST_USER_FAIL
 	};
-};
-/*export class GetUsersSuccess implements Action  {
+};*/
+
+export class GetUsers implements Action {
+  readonly type = GET_USERS;
+  consturctor() {}
+}
+
+export class GetUsersSuccess implements Action  {
   readonly type = GET_USERS_SUCCESS;
   constructor(public payload: User[]) {}
 }
@@ -126,6 +133,6 @@ export type Actions
 | EditUserFail
 | PostUser
 | PostUserSuccess
-| PostUserFail;*/
+| PostUserFail;
 
 // export type Actions = GetUsers;  this one doesn't work

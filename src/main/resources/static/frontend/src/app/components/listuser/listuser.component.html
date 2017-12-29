@@ -1,5 +1,5 @@
 
-<app-search></app-search>
+<!--<app-search></app-search> -->
 <i class="material-icons md-18 orange600">face</i>
 <i class="material-icons md-24">&#xE87C;</i>
 <i class="material-icons md-36">face</i>
@@ -327,7 +327,7 @@
                 <th>Operations</th>
               </thead>
               <tbody>
-            <tr *ngFor="let user of users" >
+            <tr *ngFor="let user of (users$ | async)" >
               <td> {{user.id}} </td>
               <td>{{user.fname}} </td>
               <td>{{user.lname}} </td>

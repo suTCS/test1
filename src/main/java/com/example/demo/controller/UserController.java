@@ -54,7 +54,7 @@ public class UserController {
 		return userRepository.save(user);
 }
 	
-	@GetMapping("/users/{lname}")
+	@GetMapping("/user/{lname}")
 	public List<User> findByLastName(@PathVariable String lname) {
 		List<User> searchResult = userRepository.findBylname(lname);
 		System.out.println("hi" + searchResult);

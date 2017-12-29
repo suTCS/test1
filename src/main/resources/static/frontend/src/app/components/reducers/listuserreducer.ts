@@ -1,84 +1,58 @@
-/*import {User} from '../../models/user.interface';
-// import * as listuseractions from '../actions/listuseractions';
-import {PayloadAction, GET_USERS, GET_USERS_SUCCESS, GET_USERS_FAIL, REQ_ADD_ITEM, POST_USER, POST_USER_SUCCESS, POST_USER_FAIL} from '../actions/listuseractions';
-import {append, assocPath} from 'ramda';
-import {Action} from '@ngrx/store';
-import {IList} from '../interface/list';
-// import {Observable} from 'rxjs/Observable';
-// import 'rxjs/add/observable/of';
+import {User} from '../../models/user.interface';
+import * as listuseractions from '../actions/listuseractions';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
-// export type Action = listuseractions.Actions;
+export type Action = listuseractions.Actions;
 
-const storeInitialState: IList = {
-    items: [],
-    addReqSent: null,
-    getReqSent: false,
-    lastAddReqFailed: false,
-    lastGetReqFailed: false
+export const initialState: AppState = {
+    entities: [],
+    loading: false,
+    loaded: true
 }
 
 
-/*export interface AppState {
-  users: User[];
+export interface AppState {
+    entities: User[],
+    loading: boolean,
+    loaded: boolean
 }
 
-export function listuserReducer(state: IList = storeInitialState, action: PayloadAction): IList {
+export function listuserReducer(state: AppState = initialState, action: Action) {
   
-    if(action.type === GET_USERS) {
-        return assocPath(
-            ['getReqSent'],
-            true,
-            state
-        );
+    switch (action.type) {
+        case listuseractions.GET_USERS:
+          return {...state, loading: true , loaded: false};
+        case listuseractions.GET_USERS_SUCCESS:
+          return {...state, entities: action.payload, loading: false,  loaded: true};
+        case listuseractions.GET_USERS_FAIL:
+        return {...state, entities: [], loading: false, loaded: true};
+        /*case ListUserActions.DELETE_USER:
+          return {...state, loading: true};
+        case ListUserActions.DELETE_USER_SUCCESS:
+          return {...state, ...action.payload, loading: false};
+        case ListUserActions.DELETE_USER_FAIL:
+          return {...state, ...action.payload, loading: false};
+        case ListUserActions.EDIT_USER:
+          return {...state, loading: true};
+        case ListUserActions.EDIT_USER_SUCCESS:
+          return {...state, ...action.payload, loading: false};
+        case ListUserActions.EDIT_USER_FAIL:
+          return {...state, ...action.payload, loading: false};
+        case ListUserActions.POST_USER:
+          return {...state, loading: true};
+        case ListUserActions.POST_USER_SUCCESS:
+          return {...state, ...action.payload, loading: false};
+        case ListUserActions.POST_USER_FAIL:
+          return {...state, ...action.payload, loading: false}; */
+    
+        default: {
+          return state; }
+      }
     }
     
-    if(action.type === GET_USERS_SUCCESS) {
-        return assocPath(
-            ['getReqSent'],
-            false,
-            assocPath(
-                ['lastGetReqFailed'],
-                false,
-                state
-            )
-        );
-    }
-
-    if(action.type === GET_USERS_FAIL) {
-        return assocPath(
-            ['getReqSent'],
-            false,
-            assocPath(
-                ['lastGetReqFailed'],
-                true,
-                state
-            )
-        );
-    }
-
-    if(action.type === REQ_ADD_ITEM) {
-        return assocPath(['addReqSent'], action.payload, state);
-    }
-
-    if(action.type === POST_USER) {
-        return assocPath(['items'], append(action.payload, state.items), state);
-    }
-
-    if(action.type === POST_USER_SUCCESS) {
-        return assocPath(['addReqSent'], null, assocPath(['lastAddReqFailed'], false, state));
-    }
-
-    if(action.type === POST_USER_FAIL) {
-        return assocPath(
-			['addReqSent'],
-			null,
-			assocPath(
-				['lastAddReqFailed'], 
-				true,
-				state
-			)
-		);
-
-    }
-    return state;
-}*/
+    export const getUsers = (state: AppState) => state.entities;
+    export const getLoading = (state: AppState ) => state.loading;
+    export const getLoaded = (state: AppState ) => state.loaded;
+    
+    

@@ -2,6 +2,9 @@ import { Component, OnInit, ViewEncapsulation, Pipe, PipeTransform } from '@angu
 import { ProfileService } from '../../services/profile.service';
 import {User} from '../../models/user.interface';
 import {Userr} from '../../models/user';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/operator/debounceTime';
 
 
 @Component({
@@ -12,17 +15,33 @@ import {Userr} from '../../models/user';
 })
 export class SearchComponent implements OnInit {
 
-  users: Userr[];
+  users: Observable<Userr[]>;
   //private user: Userr;
-  lastName: string;
+  private lastName = new Subject<string>();
 
   constructor(private _userService: ProfileService) { }
 
   ngOnInit() {
-    this.lastName = "";
+   // this.lastName = "";
     //this.users = this._userService.getter();
+
+    /*this.users = this.lastName
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => term
+      ? this._userService.findByLastName(term)
+    : Observable.of<User[]>([]))
+    .catch(error => {
+      console.log(error);
+      return Observable.of<User[]>([]);
+    })*/
   }
 
+  search(term: string): void {
+    this.lastName.next(term);
+  }
+
+/*
   private searchCustomers() {
     this._userService.findByLastName(this.lastName).subscribe(() => 
       this.users = users)
@@ -31,5 +50,5 @@ export class SearchComponent implements OnInit {
   // this.dataService.getCustomersByLastName(this.lastName).then(customers => this.customers = customers);
   onSubmit() {
     this.searchCustomers();
-  }
+  }*/
 }

@@ -6,12 +6,13 @@ import {Userr} from '../../models/user';
 
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-// import * as listUserActions from '../actions/listuseractions';
-// import {AppState} from '../reducers/listuserreducer';
+import * as listUserActions from '../actions/listuseractions';
+import * as fromRoot from '../../big-reducer'
+import {AppState} from '../reducers/listuserreducer';
 //import {listuserReducer} from '../reducers/listuserreducer';
-import 'rxjs/Rx';
-import {IList} from '../interface/list';
-import {IStore} from '../interface/store';
+//import 'rxjs/Rx';
+//import {IList} from '../interface/list';
+//import {IStore} from '../interface/store';
 
 import {Address} from '../../models/address';
 
@@ -70,7 +71,7 @@ openSnackBar() {
   showFiller = false;
 //
 
- dataSource = new UserDataSource(this._userService);
+ //dataSource = new UserDataSource(this._userService);
  displayedColumns = ['id', 'fname', 'lname', "delete", "edit"];
 //MatPaginator = new UserDataSource(this._userService);
 
@@ -117,16 +118,20 @@ recentchanges = [
 ];
 
 //
-  private users: User[];
+  // private users: User[];
 //
+users$: Observable<User[]>;
+loading$: Observable<boolean>;
 
 
 
-
-constructor(private _userService: ProfileService, private _router: Router, public dialog: MatDialog, public snackBar: MatSnackBar) {}
+constructor(private _userService: ProfileService, private _router: Router, public dialog: MatDialog, public snackBar: MatSnackBar, private store: Store<AppState>) {
+  this.loading$  = this.store.select(fromRoot.getUsersLoading);
+  this.users$ = this.store.select(fromRoot.getUserEntities)
+}
   
 ngOnInit() {
-    this._userService.getUsers().subscribe((users) => {
+    /*this._userService.getUsers().subscribe((users) => {
       console.log(users);
       this.users = users;
     },
@@ -136,6 +141,8 @@ ngOnInit() {
     () => {
       console.log('success');
     });
+    */
+    this.store.dispatch(new listUserActions.GetUsers());
   }
 
   deleteUser(user) {

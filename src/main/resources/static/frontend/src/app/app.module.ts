@@ -15,8 +15,9 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
-// import {ListuserEffects} from './components/effects/listusereffects';
-//import {listuserReducer} from './components/reducers/listuserreducer';
+import {ListuserEffects} from './components/effects/listusereffects';
+import {BigReducer} from './big-reducer';
+
 import {MaterialModule} from './material.module';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { SearchComponent } from './components/search/search.component';
@@ -46,10 +47,10 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    MaterialModule
-    //EffectsModule.forRoot([ListuserEffects]),
-    //StoreModule.forRoot({user: listuserReducer}),
-//StoreDevtoolsModule.instrument({maxAge: 25})
+    MaterialModule,
+    EffectsModule.forRoot([ListuserEffects]),
+    StoreModule.forRoot(BigReducer),
+    StoreDevtoolsModule.instrument({maxAge: 25})
     
   ],
  
